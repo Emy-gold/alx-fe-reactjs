@@ -1,5 +1,5 @@
 import './App.css';
-import WelcomeMessage from './components/WelcomeMessage'; // ✅ Correct casing
+import WelcomeMessage from './components/TempComponent'; // ✅ Correct casing
 
 
 function App() {
