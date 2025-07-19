@@ -1,4 +1,4 @@
-function welcomeMessage() {
+function WelcomeMessage() {
     return (
         <div>
             <h1>Hello everyone, I am learning React at ALX!</h1>
@@ -6,4 +6,5 @@ function welcomeMessage() {
         </div>
     );
 }
-export default welcomeMessage;
+
+export default WelcomeMessage;
