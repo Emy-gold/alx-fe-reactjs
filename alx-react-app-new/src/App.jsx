@@ -1,13 +1,14 @@
-import React from 'react';
-import Counter from './components/Counter';  // Import the Counter component
+// src/App.jsx
+import ProfilePage from './ProfilePage';
+import UserContext from './UserContext';
 
 function App() {
+  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
+
   return (
-    <div style={{ padding: '20px' }}>
-      <h1 style={{ textAlign: 'center' }}>React Counter Application</h1>
-      {/* Include the Counter component */}
-      <Counter />
-    </div>
+    <UserContext.Provider value={userData}>
+      <ProfilePage />
+    </UserContext.Provider>
   );
 }
 
