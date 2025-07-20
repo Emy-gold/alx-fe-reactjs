@@ -1,7 +1,7 @@
 function Footer() {
     return (
         <footer>
-            <p>Copyright © 2023 ToshiBa</p>
+            <p>© 2023 City Lovers</p>
         </footer>
     );
 }
