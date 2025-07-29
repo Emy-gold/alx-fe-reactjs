@@ -1,32 +1,13 @@
-import axios from 'axios';
+import githubApi from './githubApi';
 
-const API_URL = 'https://api.github.com';
-const API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY;
-
-const githubAxios = axios.create({
-    baseURL: API_URL,
-    headers: {
-        'Authorization': `token ${API_KEY}`,
-        'Accept': 'application/vnd.github.v3+json'
-    }
-});
-
-export const fetchGithubUser = async (username) => {
-    try {
-        const response = await githubAxios.get(`/users/${username}`);
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching user:', error);
-        throw error;
-    }
+// ✅ Basic user search by username
+export const fetchUserData = async (username) => {
+    const response = await githubApi.get(`users/${username}`);
+    return response.data;
 };
 
+// ✅ Advanced search with filters (optional)
 export const searchGithubUsers = async (query) => {
-    try {
-        const response = await githubAxios.get(`/search/users?q=${encodeURIComponent(query)}`);
-        return response.data;
-    } catch (error) {
-        console.error('Error searching users:', error);
-        throw error;
-    }
+    const response = await githubApi.get(`search/users?q=${encodeURIComponent(query)}`);
+    return response.data;
 };

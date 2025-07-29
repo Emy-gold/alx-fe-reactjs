@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { fetchGithubUser, searchGithubUsers } from '../services/githubService';
+import { fetchUserData, searchGithubUsers } from '../services/githubService';
 
 function Search() {
     const [username, setUsername] = useState('');
@@ -10,6 +10,7 @@ function Search() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
+    // Basic Search
     const handleBasicSearch = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -18,7 +19,7 @@ function Search() {
         setResults([]);
 
         try {
-            const data = await fetchGithubUser(username);
+            const data = await fetchUserData(username); // ✅ fixed function name
             setUser(data);
         } catch (err) {
             console.error(err);
@@ -28,6 +29,7 @@ function Search() {
         }
     };
 
+    // Advanced Search
     const handleAdvancedSearch = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -88,7 +90,7 @@ function Search() {
                 <button type="submit">Advanced Search</button>
             </form>
 
-            {/* Display Area */}
+            {/* Display Results */}
             {loading && <p>Loading...</p>}
             {error && <p className="error">{error}</p>}
 
