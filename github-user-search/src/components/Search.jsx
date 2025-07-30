@@ -38,7 +38,7 @@ function Search() {
         setUser(null);
 
         if (!location || !minRepos) {
-            setError('Please provide both location and minimum repositories');
+            setError('Looks like we cant find the user');
             setLoading(false);
             return;
         }
@@ -54,7 +54,7 @@ function Search() {
             }
         } catch (err) {
             console.error(err);
-            setError("Something went wrong while fetching users");
+            setError("Looks like we cant find the user");
         } finally {
             setLoading(false);
         }
