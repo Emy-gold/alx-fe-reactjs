@@ -1,19 +1,29 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY;
+const BASE_URL = "https://api.github.com/search/users";
 
-// ✅ Basic: Fetch a single GitHub user by username
-export const fetchUserData = async (username) => {
-    const response = await axios.get(`https://api.github.com/users/${username}`, {
-        headers: API_KEY ? { Authorization: `token ${API_KEY}` } : {},
-    });
-    return response.data;
-};
+/**
+ * Search GitHub users with optional filters: location and minRepos
+ * @param {string} query - Search text (required)
+ * @param {string} location - Optional location filter
+ * @param {number} minRepos - Optional minimum public repos filter
+ */
+export const searchUsers = async (query, location = "", minRepos = 0) => {
+    let searchQuery = `${query} in:login`;
 
-// ✅ Advanced: Search GitHub users with query
-export const searchGithubUsers = async (query) => {
-    const response = await axios.get(`https://api.github.com/search/users?q=${encodeURIComponent(query)}`, {
-        headers: API_KEY ? { Authorization: `token ${API_KEY}` } : {},
-    });
-    return response.data;
+    if (location) {
+        searchQuery += ` location:${location}`;
+    }
+
+    if (minRepos > 0) {
+        searchQuery += ` repos:>${minRepos}`;
+    }
+
+    try {
+        const response = await axios.get(`${BASE_URL}?q=${encodeURIComponent(searchQuery)}`);
+        return response.data.items;
+    } catch (error) {
+        console.error("GitHub API Error:", error);
+        throw error;
+    }
 };
