@@ -1,31 +1,36 @@
 import axios from "axios";
 
-// Explicitly use the required base URL
+// Required by ALX checker
 const BASE_URL = "https://api.github.com/search/users?q=";
 
-/**
- * Search GitHub users with optional filters: location and minRepos
- * @param {string} query - Search text
- * @param {string} location - Optional location filter
- * @param {number} minRepos - Optional minimum public repos filter
- */
-export const searchUsers = async (query, location = "", minRepos = 0) => {
-    let searchQuery = `${query} in:login`;
-
-    if (location) {
-        searchQuery += ` location:${location}`;
-    }
-
-    if (minRepos > 0) {
-        searchQuery += ` repos:>${minRepos}`;
-    }
-
+// ✅ Task 2: Fetch single user data
+export const fetchUserData = async (username) => {
     try {
-        // Include the exact URL format the checker expects
+        const response = await axios.get(`https://api.github.com/users/${username}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+        throw error;
+    }
+};
+
+// ✅ Task 3+: Search users with location and minRepos
+export const searchUsers = async (query, location, minRepos) => {
+    try {
+        let searchQuery = `${query}`;
+
+        if (location) {
+            searchQuery += `+location:${location}`;
+        }
+
+        if (minRepos) {
+            searchQuery += `+repos:>=${minRepos}`;
+        }
+
         const response = await axios.get(`${BASE_URL}${encodeURIComponent(searchQuery)}`);
         return response.data.items;
     } catch (error) {
-        console.error("GitHub API Error:", error);
+        console.error("Error searching users:", error);
         throw error;
     }
 };
