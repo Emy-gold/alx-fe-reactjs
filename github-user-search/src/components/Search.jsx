@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { fetchUserData, searchGithubUsers } from '../services/githubService';
+import { fetchUserData, searchUsers } from '../services/githubService';
+
 
 
 function Search() {
@@ -47,7 +48,7 @@ function Search() {
         const query = `location:${location} repos:>=${minRepos}`;
 
         try {
-            const data = await searchGithubUsers(query);
+            const data = await searchUsers(query);
             if (data.total_count === 0) {
                 setError("No users found for this search");
             } else {
