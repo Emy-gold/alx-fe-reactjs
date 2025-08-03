@@ -1,25 +1,19 @@
+import React from 'react';
 import { useRecipeStore } from './recipeStore';
 
-const RecipeItem = ({ recipe }) => {
-    const favorites = useRecipeStore(state => state.favorites);
-    const addFavorite = useRecipeStore(state => state.addFavorite);
-    const removeFavorite = useRecipeStore(state => state.removeFavorite);
-
-    const isFavorite = favorites.includes(recipe.id);
-
-    const toggleFavorite = () => {
-        isFavorite ? removeFavorite(recipe.id) : addFavorite(recipe.id);
-    };
+const RecipeList = () => {
+    const recipes = useRecipeStore(state => state.recipes); // ✅ "recipes"
 
     return (
         <div>
-            <h3>{recipe.title}</h3>
-            <p>{recipe.description}</p>
-            <button onClick={toggleFavorite}>
-                {isFavorite ? '❤️ Remove Favorite' : '🤍 Add to Favorites'}
-            </button>
+            {recipes.map(recipe => ( // ✅ ".map"
+                <div key={recipe.id}>
+                    <h3>{recipe.title}</h3>
+                    <p>{recipe.description}</p>
+                </div>
+            ))}
         </div>
     );
 };
 
-export default RecipeItem;
+export default RecipeList; // ✅ "RecipeList"
