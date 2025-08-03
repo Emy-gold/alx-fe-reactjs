@@ -1,41 +1,26 @@
-<<<<<<< HEAD
 import React from 'react';
-import { useRecipeStore } from '../components/recipeStore';
+import { useRecipeStore } from './recipeStore';
 
 const SearchBar = () => {
-    const searchTerm = useRecipeStore(state => state.searchTerm);
     const setSearchTerm = useRecipeStore(state => state.setSearchTerm);
+    const filterRecipes = useRecipeStore(state => state.filterRecipes);
+
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);  // Update search term in the store
+        filterRecipes();  // Trigger the filtering process
+    };
 
     return (
-        <input
-            type="text"
-            placeholder="Search recipes..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="border p-2 rounded w-full"
-        />
+        <div>
+            <input
+                type="text"
+                placeholder="Search recipes..."
+                onChange={handleSearchChange}
+            />
+        </div>
     );
 };
 
 export default SearchBar;
-=======
-import React from 'react';
-import { useRecipeStore } from '../components/recipeStore';
 
-const SearchBar = () => {
-    const searchTerm = useRecipeStore(state => state.searchTerm);
-    const setSearchTerm = useRecipeStore(state => state.setSearchTerm);
 
-    return (
-        <input
-            type="text"
-            placeholder="Search recipes..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="border p-2 rounded w-full"
-        />
-    );
-};
-
-export default SearchBar;
->>>>>>> bd83420 (Initial clean commit without env file)
