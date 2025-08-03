@@ -19,8 +19,8 @@ const EditRecipeForm = () => {
         }
     }, [recipe]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (event) => {
+        event.preventDefault(); // ✅ Prevent default form submission
         updateRecipe({ id: recipeId, title, description });
         history.push(`/details/${recipeId}`);
     };
@@ -46,4 +46,5 @@ const EditRecipeForm = () => {
 };
 
 export default EditRecipeForm;
+
 
