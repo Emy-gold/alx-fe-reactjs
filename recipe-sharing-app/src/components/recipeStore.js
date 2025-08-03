@@ -1,15 +1,27 @@
-import { create } from 'zustand'; // ✅ "zustand" and "create"
+import { create } from 'zustand';
 
 export const useRecipeStore = create(set => ({
     recipes: [],
     favorites: [],
     recommendations: [],
 
-    setRecipes: (recipes) => set({ recipes }), // ✅ "setRecipes"
+    setRecipes: (recipes) => set({ recipes }),
 
-    addRecipe: (newRecipe) => // ✅ "addRecipe"
+    addRecipe: (newRecipe) =>
         set(state => ({
             recipes: [...state.recipes, newRecipe],
+        })),
+
+    deleteRecipe: (recipeId) =>
+        set(state => ({
+            recipes: state.recipes.filter(recipe => recipe.id !== recipeId),
+        })),
+
+    updateRecipe: (updatedRecipe) =>
+        set(state => ({
+            recipes: state.recipes.map(recipe =>
+                recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+            ),
         })),
 
     addFavorite: (recipeId) =>

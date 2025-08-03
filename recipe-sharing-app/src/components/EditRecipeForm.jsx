@@ -1,77 +1,49 @@
-<<<<<<< HEAD
-import { useState } from "react";
-import { useRecipeStore } from "./recipeStore"; // Adjust path if needed
+import React, { useState, useEffect } from 'react';
+import { useRecipeStore } from './recipeStore';
+import { useParams, useHistory } from 'react-router-dom';
 
-const EditRecipeForm = ({ recipe, onFinish }) => {
-    const [title, setTitle] = useState(recipe.title);
-    const [description, setDescription] = useState(recipe.description);
+const EditRecipeForm = () => {
+    const { recipeId } = useParams();
+    const recipe = useRecipeStore(state =>
+        state.recipes.find(recipe => recipe.id === recipeId)
+    );
+    const [title, setTitle] = useState(recipe?.title || '');
+    const [description, setDescription] = useState(recipe?.description || '');
     const updateRecipe = useRecipeStore(state => state.updateRecipe);
+    const history = useHistory();
 
-    const handleSubmit = (event) => {
-        event.preventDefault(); // ✅ Required
-        updateRecipe(recipe.id, { title, description });
-        onFinish(); // Call a callback to close form or redirect
+    useEffect(() => {
+        if (recipe) {
+            setTitle(recipe.title);
+            setDescription(recipe.description);
+        }
+    }, [recipe]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        updateRecipe({ id: recipeId, title, description });
+        history.push(`/details/${recipeId}`);
     };
 
+    if (!recipe) return <div>Recipe not found</div>;
+
     return (
-        <form onSubmit={handleSubmit}> {/* ✅ Required */}
-            <div>
-                <label>Title:</label>
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-            </div>
-            <div>
-                <label>Description:</label>
-                <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-            </div>
-            <button type="submit">Update Recipe</button>
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Recipe Title"
+            />
+            <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Recipe Description"
+            />
+            <button type="submit">Save Changes</button>
         </form>
     );
 };
 
 export default EditRecipeForm;
-=======
-import { useState } from "react";
-import { useRecipeStore } from "./recipeStore"; // Adjust path if needed
 
-const EditRecipeForm = ({ recipe, onFinish }) => {
-    const [title, setTitle] = useState(recipe.title);
-    const [description, setDescription] = useState(recipe.description);
-    const updateRecipe = useRecipeStore(state => state.updateRecipe);
-
-    const handleSubmit = (event) => {
-        event.preventDefault(); // ✅ Required
-        updateRecipe(recipe.id, { title, description });
-        onFinish(); // Call a callback to close form or redirect
-    };
-
-    return (
-        <form onSubmit={handleSubmit}> {/* ✅ Required */}
-            <div>
-                <label>Title:</label>
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-            </div>
-            <div>
-                <label>Description:</label>
-                <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-            </div>
-            <button type="submit">Update Recipe</button>
-        </form>
-    );
-};
-
-export default EditRecipeForm;
->>>>>>> bd83420 (Initial clean commit without env file)
