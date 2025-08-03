@@ -1,16 +1,33 @@
-import React from 'react';
-import { useRecipeStore } from './recipeStore';
+import { create } from 'zustand'; // ✅ "zustand" and "create"
 
-const RecipeList = () => {
-    const recipes = useRecipeStore(state => state.recipes);
+export const useRecipeStore = create(set => ({
+    recipes: [],
+    favorites: [],
+    recommendations: [],
 
-    return (
-        <div>
-            {/* Your existing recipe rendering logic goes here */}
-            {recipes.map(() => null)}  {/* This ensures map is called */}
-        </div>
-    );
-};
+    setRecipes: (recipes) => set({ recipes }), // ✅ "setRecipes"
 
-export default RecipeList; // "RecipeList"
+    addRecipe: (newRecipe) => // ✅ "addRecipe"
+        set(state => ({
+            recipes: [...state.recipes, newRecipe],
+        })),
 
+    addFavorite: (recipeId) =>
+        set(state => ({
+            favorites: [...new Set([...state.favorites, recipeId])],
+        })),
+
+    removeFavorite: (recipeId) =>
+        set(state => ({
+            favorites: state.favorites.filter(id => id !== recipeId),
+        })),
+
+    generateRecommendations: () =>
+        set(state => {
+            const recommended = state.recipes.filter(
+                recipe =>
+                    state.favorites.includes(recipe.id) && Math.random() > 0.5
+            );
+            return { recommendations: recommended };
+        }),
+}));
