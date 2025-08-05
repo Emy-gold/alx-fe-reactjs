@@ -1,12 +1,18 @@
 import React from 'react'
 import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import UserProfile from './components/UserProfile';
 
 function App() {
 
 
   return (
     <>
-      <h1 className='text-3xl font-bold underline bg-blue-50'>Hello World</h1>
+      <Router>
+        <Routes>
+          <Route path="/profile" element={<UserProfile />} />
+        </Routes>
+      </Router>
     </>
   )
 }
