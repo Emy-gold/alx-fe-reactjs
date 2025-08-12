@@ -15,7 +15,7 @@ function HomePage() {
         <body className="bg-white">
             <main className="max-w-6xl mx-auto px-4 py-8">
                 <h1 className="text-3xl font-bold mb-12 text-center">🍽 Recipe Sharing Platform</h1>
-                <div className="grid justify-center gap-6 sm:grid-cols-1 grid-cols-2 w-[600px]">
+                <div className="grid justify-center gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {recipes.map(recipe => (
                         <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition" key={recipe.id}>
                             <img
