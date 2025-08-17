@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import recipesData from "../data.json";
 import { Link } from "react-router-dom";
+import { AddRecipeForm } from './AddRecipeForm';
 
 
 function HomePage() {
