@@ -60,7 +60,7 @@ export default function AddRecipeForm() {
             className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow space-y-4"
             noValidate
         >
-            <h1 className="text-2xl font-semibold text-center md:text-xl sm:text-lg">Add a New Recipe</h1>
+            <h1 className="text-2xl font-semibold text-center md:text-xl">Add a New Recipe</h1>
 
             {submitted && (
                 <div className="rounded-lg bg-green-50 text-green-700 p-3 text-sm">
