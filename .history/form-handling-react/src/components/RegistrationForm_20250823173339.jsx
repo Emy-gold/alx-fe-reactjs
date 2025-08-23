@@ -10,8 +10,8 @@ function RegistrationForm() {
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (name === 'username') setUsername(value);
-        if (name === 'email') setEmail(value);
-        if (name === 'password') setPassword(value);
+        if (email === 'email') setEmail(value);
+        if (password === 'password') setPassword(value);
     }
 
     const handleSubmit = (e) => {

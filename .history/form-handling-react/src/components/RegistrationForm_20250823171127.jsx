@@ -3,20 +3,16 @@ import { useState } from 'react';
 
 function RegistrationForm() {
 
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [formData, setFormData] = useState({ username: '', email: '', password: '' });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'username') setUsername(value);
-        if (name === 'email') setEmail(value);
-        if (name === 'password') setPassword(value);
+        setFormData(prevState => ({ ...prevState, [name]: value }));
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({ username, email, password });
+        console.log(formData);
     }
 
     return (
@@ -25,7 +21,7 @@ function RegistrationForm() {
                 <input
                     type="text"
                     name="username"
-                    value={username}
+                    value={formData.name}
                     onChange={handleChange}
                     placeholder='username'
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm p-2 rounded-lg mb-5'
@@ -33,7 +29,7 @@ function RegistrationForm() {
                 <input
                     type="email"
                     name="email"
-                    value={email}
+                    value={formData.email}
                     onChange={handleChange}
                     placeholder='email'
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm p-2 rounded-lg mb-5'
@@ -41,9 +37,9 @@ function RegistrationForm() {
                 <input
                     type="password"
                     name="password"
-                    value={password}
+                    value={formData.password}
                     onChange={handleChange}
-                    placeholder='password'
+                    placeholder='email'
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm p-2 rounded-lg mb-5'
                 />
                 <button type='submit' className='bg-green-500 py-3 px-6 text-white text-md font-semibold rounded-xl hover:bg-green-600 duration-300'>Submit</button>
