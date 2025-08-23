@@ -42,7 +42,7 @@ function RegistrationForm() {
                     placeholder='email'
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm p-2 rounded-lg mb-5'
                 />
-                <button type='submit' className='bg-green-500 py-3 px-6 text-white text-md font-semibold rounded-xl hover:bg-green-600 duration-300'>Submit</button>
+                <button type='submit' className='bg-green-500 py-3 px-5'>submit</button>
             </form>
         </div>
     )

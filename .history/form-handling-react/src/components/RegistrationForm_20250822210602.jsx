@@ -16,33 +16,29 @@ function RegistrationForm() {
     }
 
     return (
-        <div className='flex w-full mx-auto h-screen justify-center items-center'>
-            <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center w-72 h-80 rounded-lg shadow-lg bg-green-50 p-10'>
+        <div className='w-full mx-auto h-screen'>
+            <form onSubmit={handleSubmit} className='flex flex-col items-center bg-green-700 h-16'>
+                <label>username :</label>
                 <input
                     type="text"
                     name="username"
-                    value={formData.name}
+                    value={formData.username}
                     onChange={handleChange}
-                    placeholder='username'
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm p-2 rounded-lg mb-5'
                 />
+                <label>email :</label>
                 <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder='email'
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm p-2 rounded-lg mb-5'
                 />
+                <label>password :</label>
                 <input
                     type="password"
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    placeholder='email'
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm p-2 rounded-lg mb-5'
                 />
-                <button type='submit' className='bg-green-500 py-3 px-6 text-white text-md font-semibold rounded-xl hover:bg-green-600 duration-300'>Submit</button>
             </form>
         </div>
     )
