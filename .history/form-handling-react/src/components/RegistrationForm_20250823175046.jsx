@@ -6,7 +6,7 @@ function RegistrationForm() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState('');
+    const [error, setError] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -23,8 +23,6 @@ function RegistrationForm() {
         if (!username) newErrors.username = "Username is required";
         if (!email) newErrors.email = "Email is required";
         if (!password) newErrors.password = "Password is required";
-
-        setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
             console.log({ username, email, password });
@@ -43,7 +41,6 @@ function RegistrationForm() {
                     placeholder='username'
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm p-2 rounded-lg mb-5'
                 />
-                {errors.username && <p className='text-red-500 text-sm '>{errors.username}</p>}
                 <input
                     type="email"
                     name="email"
@@ -52,7 +49,6 @@ function RegistrationForm() {
                     placeholder='email'
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm p-2 rounded-lg mb-5'
                 />
-                {errors.email && <p className='text-red-500 text-sm'>{errors.email}</p>}
                 <input
                     type="password"
                     name="password"
@@ -61,7 +57,6 @@ function RegistrationForm() {
                     placeholder='password'
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm p-2 rounded-lg mb-5'
                 />
-                {errors.password && <p className='text-red-500 text-sm '>{errors.password}</p>}
                 <button type='submit' className='bg-green-500 py-3 px-6 text-white text-md font-semibold rounded-xl hover:bg-green-600 duration-300'>Submit</button>
             </form>
         </div>

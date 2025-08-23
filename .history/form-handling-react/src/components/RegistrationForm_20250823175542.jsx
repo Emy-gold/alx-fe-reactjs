@@ -43,7 +43,7 @@ function RegistrationForm() {
                     placeholder='username'
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm p-2 rounded-lg mb-5'
                 />
-                {errors.username && <p className='text-red-500 text-sm '>{errors.username}</p>}
+                {errors.username && <p className='text-red-500 text-sm mb-3'>{errors.username}</p>}
                 <input
                     type="email"
                     name="email"
@@ -52,7 +52,7 @@ function RegistrationForm() {
                     placeholder='email'
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm p-2 rounded-lg mb-5'
                 />
-                {errors.email && <p className='text-red-500 text-sm'>{errors.email}</p>}
+                {errors.email && <p className='text-red-500 text-sm mb-3'>{errors.email}</p>}
                 <input
                     type="password"
                     name="password"
@@ -61,7 +61,7 @@ function RegistrationForm() {
                     placeholder='password'
                     className='bg-gray-50 border border-gray-300 text-gray-900 text-sm p-2 rounded-lg mb-5'
                 />
-                {errors.password && <p className='text-red-500 text-sm '>{errors.password}</p>}
+                {errors.password && <p className='text-red-500 text-sm mb-3'>{errors.password}</p>}
                 <button type='submit' className='bg-green-500 py-3 px-6 text-white text-md font-semibold rounded-xl hover:bg-green-600 duration-300'>Submit</button>
             </form>
         </div>
