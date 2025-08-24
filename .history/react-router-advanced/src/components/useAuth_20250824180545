@@ -1,0 +1,4 @@
+// Custom hook for easier usage
+export function useAuth() {
+    return useContext(AuthContext);
+}

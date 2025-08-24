@@ -1,19 +1,19 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider } from "./components/useAuth";
-import Login from "./components/Login";
 import Profile from "./components/Profile";
 import BlogPost from "./components/BlogPost";
-import ProtectedRoute from "./components/ProtectedRoute";
+import Login from "./components/Login";
+import ProtectedRoute, { AuthProvider } from "./components/ProtectedRoute";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
+          {/* Public routes */}
           <Route path="/login" element={<Login />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
 
-          {/* Protected Route */}
+          {/* Protected routes */}
           <Route
             path="/profile/*"
             element={
@@ -23,11 +23,8 @@ function App() {
             }
           />
 
-          {/* Dynamic Route */}
-          <Route path="/blog/:id" element={<BlogPost />} />
-
-          {/* Fallback */}
-          <Route path="*" element={<Navigate to="/" />} />
+          {/* Catch-all */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </Router>
     </AuthProvider>
@@ -35,6 +32,4 @@ function App() {
 }
 
 export default App;
-
-
 
